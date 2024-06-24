@@ -7,6 +7,8 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     header('location: ../index.php');
     exit(); // Terminate script after redirect
 } else {
+    $defaultImagePath = 'User.jpg';
+    $profileImagePath = $user_data["profile"] ?? $defaultImagePath;
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -61,9 +63,16 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="mt-3 d-flex flex-column align-items-center" id="profile-info">
-                                    <h1>
-                                        <?php echo $user_data["firstname"] . ' ' . $user_data["lastname"]; ?>'s Profile</h1>
-                                    <img class="mb-3" height="100px" width="100px" src="../uploads/<?php echo $user_data["profile"]; ?>" alt="Profile Picture">
+                                    <!-- <img src="../uploads/User.jpg" alt=""> -->
+
+                                    <?php
+                                    $defaultImagePath = 'User.jpg';
+                                    $img = $user_data["profile"];
+                                    $profileImagePath = $img ?? $defaultImagePath;
+                                    ?>
+
+                                    <h1><?php echo $user_data["firstname"] . ' ' . $user_data["lastname"]; ?>'s Profile</h1>
+                                    <img class="mb-3" height="100px" width="100px" src="../uploads/<?php echo $profileImagePath ?>" alt="Profile Picture">
                                     <p class="text-primary fw-bold fs-5">Email: <?php echo $user_data["email"]; ?></p>
                                     <p>Contact: <?php echo $user_data["contact"]; ?></p>
                                 </div>

@@ -24,10 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($title && $id && $profile) {
         try {
-            // Create a new database connection using the credentials from dbconn.php
-            $dbh = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
             // Prepare an SQL statement for execution
             $sql = "INSERT INTO favorites (post_id, title, profile) VALUES (:id, :title, :profile)";
             $stmt = $dbh->prepare($sql);

@@ -2,19 +2,17 @@
 session_start();
 include('include/dbconn.php');
 
-if (isset($_POST['login'])) {
+if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password'];
 
     try {
         // Define a parameterized SQL query
-        $sql = "SELECT * FROM registered WHERE email = :email AND password = :password";
+        $sql = "SELECT * FROM registered WHERE email = :email";
 
         // Prepare the SQL query
         $query = $dbh->prepare($sql);
-
         $query->bindParam(':email', $email, PDO::PARAM_STR); // Use PARAM_STR for string parameters
-        $query->bindParam(':password', $password, PDO::PARAM_STR); // Use PARAM_STR for string parameters
 
         // Execute the query
         $query->execute();
@@ -23,28 +21,36 @@ if (isset($_POST['login'])) {
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
-            $role = $row['role'];
-            $username = $row['firstname'] . " " . $row['lastname'];
-            $id = $row['id'];
+            $hashed_password = $row['password'];
 
-            if ($role == 'admin') {
-                $_SESSION['role'] = $role;
-                $_SESSION['alogin'] = $email; // Store email in session instead of password
-                $_SESSION['userid'] = $id;
-                header('location: admin/admin.php');
-                exit(); // Terminate script after redirect
-            } elseif ($role == 'user') { // Fixed comparison
-                $_SESSION['role'] = $role;
-                $_SESSION['ulogin'] = $email; // Store email in session instead of password
-                $_SESSION['userid'] = $id;
-                header('location: user/user.php');
-                exit(); // Terminate script after redirect
+            // Verify hashed password
+            if (password_verify($password, $hashed_password)) {
+                $role = $row['role'];
+                $username = $row['firstname'] . " " . $row['lastname'];
+                $id = $row['id'];
+
+                if ($role == 'admin') {
+                    $_SESSION['role'] = $role;
+                    $_SESSION['alogin'] = $email; // Store email in session instead of password
+                    $_SESSION['userid'] = $id;
+                    header('location: admin/admin.php');
+                    exit(); // Terminate script after redirect
+                } elseif ($role == 'user') {
+                    $_SESSION['role'] = $role;
+                    $_SESSION['ulogin'] = $email; // Store email in session instead of password
+                    $_SESSION['userid'] = $id;
+                    header('location: user/user.php');
+                    exit(); // Terminate script after redirect
+                } else {
+                    header('location: index.php');
+                    exit(); // Terminate script after redirect
+                }
             } else {
-                header('location: index.php');
-                exit(); // Terminate script after redirect
+                // Password does not match
+                echo "<div class='alert alert-danger' role='alert'>login.</div>";
             }
         } else {
-            // No user found with given credentials
+            // No user found with given email
             echo "<div class='alert alert-danger' role='alert'>Invalid email or password.</div>";
         }
     } catch (PDOException $e) {
@@ -70,19 +76,17 @@ if (isset($_POST['login'])) {
     <div class="main">
         <h1>Login</h1>
         <form method="POST">
-
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
             <div class="wrap mt-3">
-                <button type="submit" name="login">
-                    Submit
-                </button>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             </div>
-
+        </form>
+    </div>
 </body>
 
 </html>

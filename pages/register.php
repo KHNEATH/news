@@ -1,4 +1,3 @@
-<?php include('scripts/register1.php'); ?>
 <!DOCTYPE html>
 <html>
 
@@ -6,36 +5,31 @@
     <?php
     $title = 'Register';
     include('../include/header.php');
+    session_start();
     ?>
 </head>
-<?php if (isset($msg)) { ?>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Sucess:</strong> <?php echo $msg;  ?>.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-    </div>
-
-<?php } elseif (isset($error)) { ?>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Unsucess:</strong> <?php echo $msg;  ?>.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <div>
-        <?php echo $error;  ?>
-    </div>
-    </div>
-<?php } ?>
 
 <body>
+    <?php
+    if (isset($_SESSION['msg'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success:</strong> <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } elseif (isset($_SESSION['error'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php } ?>
+
     <?php
     $page = 'register';
     include('../include/navbar.php') ?>
     <div class="main">
-
         <h1 style="text-align: center;">Register</h1>
-        <form method="POST" enctype="multipart/form-data">
-
-            <label for="file">profile</label>
+        <form method="POST" action="register1.php" enctype="multipart/form-data">
+            <label for="file">Profile (optional):</label>
             <input type="file" name="file" accept="image/*">
 
             <label for="first">First Name:</label>
@@ -51,9 +45,7 @@
             <input type="date" id="dob" name="dob" placeholder="Enter your DOB" required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required title="Password must contain at least one number, 
-					one alphabet, one symbol, and be at 
-					least 8 characters long">
+            <input type="password" id="password" name="password" placeholder="Enter your password" required title="Password must contain at least one number, one alphabet, one symbol, and be at least 8 characters long">
 
             <label for="repassword">Re-type Password:</label>
             <input type="password" id="repassword" name="repassword" placeholder="Re-Enter your password" required>
@@ -77,7 +69,7 @@
             </select>
 
             <div class="wrap">
-                <button type="submit" name="register" onclick="solve()">
+                <button type="submit" name="register">
                     Submit
                 </button>
             </div>

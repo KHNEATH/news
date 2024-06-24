@@ -2,9 +2,9 @@
 <?php
 // Database connection parameters
 $host = 'localhost'; // Hostname
-$dbname = 'newssystem'; // Database name
+$dbname = 'newssystem2'; // Database name
 $username = 'root'; // Database username
-$password = 'root'; // Database password
+$password = ''; // Database password
 
 try {
     // Establish a database connection

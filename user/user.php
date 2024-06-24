@@ -19,7 +19,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
   <html lang="en">
 
   <head>
-    <?php 
+    <?php
     $title = 'User';
     include('../include/header.php') ?>
     <style>
@@ -33,9 +33,48 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
         text-decoration: underline;
         /* Optional: underline on hover */
       }
+
+
+      .card {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 600px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .card-body {
+        position: relative;
+      }
+
+      .card-text {
+        font-size: 1em;
+        line-height: 1.5;
+        word-wrap: break-word;
+        max-height: 4.5em;
+        /* Adjust this value based on your needs */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 768px) {
+        .card-text {
+          font-size: 0.9em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .card-text {
+          font-size: 0.8em;
+        }
+      }
     </style>
   </head>
-  
+
 
   <body>
     <!-- navbar -->
@@ -79,13 +118,8 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <div style="border-bottom: 6px solid #ffd93d; width: 100%; margin-top: 10px"></div>
     <!-- paragraph detail -->
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px">
-      <h3>NEWS</h3>
+      <h3>Hot News</h3>
     </div>
-    <!-- category -->
-    <div class="container">
-
-    </div>
-
     <?php
     try {
       // Query to fetch data
@@ -97,46 +131,45 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
-
-
     ?>
     <div class="container">
       <div class="row">
         <?php foreach ($result as $row) : ?>
           <div class="col-lg-3 col-sm-12 mb-2">
-            <div class="card h-100">
-              <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" class="card-img-top" style="object-fit: cover; height: 300px;" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                <a class="no-underline" href="detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>">
-                  <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
-                </a>
-              </div>
-              <div class="card-footer">
-                <?php
-                if (isset($row['created_at'])) {
-                  $createdDate = new DateTime($row['created_at']);
-                  $now = new DateTime();
-                  $interval = $now->diff($createdDate);
+            <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
+            <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
+              <div class="card h-100">
+                <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                  <p class="card-text"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
+                </div>
+                <div class="card-footer">
+                  <?php
+                  if (isset($row['created_at'])) {
+                    $createdDate = new DateTime($row['created_at']);
+                    $now = new DateTime();
+                    $interval = $now->diff($createdDate);
 
-                  if ($interval->y > 0) {
-                    $timeAgo = $interval->y . ' years ago';
-                  } elseif ($interval->m > 0) {
-                    $timeAgo = $interval->m . ' months ago';
-                  } elseif ($interval->d > 0) {
-                    $timeAgo = $interval->d . ' days ago';
-                  } elseif ($interval->h > 0) {
-                    $timeAgo = $interval->h . ' hours ago';
-                  } elseif ($interval->i > 0) {
-                    $timeAgo = $interval->i . ' minutes ago';
-                  } else {
-                    $timeAgo = 'Just now';
+                    if ($interval->y > 0) {
+                      $timeAgo = $interval->y . ' years ago';
+                    } elseif ($interval->m > 0) {
+                      $timeAgo = $interval->m . ' months ago';
+                    } elseif ($interval->d > 0) {
+                      $timeAgo = $interval->d . ' days ago';
+                    } elseif ($interval->h > 0) {
+                      $timeAgo = $interval->h . ' hours ago';
+                    } elseif ($interval->i > 0) {
+                      $timeAgo = $interval->i . ' minutes ago';
+                    } else {
+                      $timeAgo = 'Just now';
+                    }
+                    echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                   }
-                  echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
-                }
-                ?>
+                  ?>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         <?php endforeach; ?>
       </div>
@@ -147,11 +180,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <div style="border-bottom: 6px solid #ffd93d; width: 100%; margin-top: 10px"></div>
     <!-- paragraph detail -->
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px">
-      <h3>Hot News</h3>
-    </div>
-    <!-- category -->
-    <div class="container">
-
+      <h3>News</h3>
     </div>
     <?php
     try {
@@ -169,37 +198,40 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
       <div class="row">
         <?php foreach ($result as $row) : ?>
           <div class="col-lg-3 col-sm-12 mb-2">
-            <div class="card h-100">
-              <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                <p class="card-text"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
-              </div>
-              <div class="card-footer">
-                <?php
-                if (isset($row['created_at'])) {
-                  $createdDate = new DateTime($row['created_at']);
-                  $now = new DateTime();
-                  $interval = $now->diff($createdDate);
+            <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
+            <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
+              <div class="card h-100">
+                <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                  <p class="card-text lh-base text-break"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
+                </div>
+                <div class="card-footer">
+                  <?php
+                  if (isset($row['created_at'])) {
+                    $createdDate = new DateTime($row['created_at']);
+                    $now = new DateTime();
+                    $interval = $now->diff($createdDate);
 
-                  if ($interval->y > 0) {
-                    $timeAgo = $interval->y . ' years ago';
-                  } elseif ($interval->m > 0) {
-                    $timeAgo = $interval->m . ' months ago';
-                  } elseif ($interval->d > 0) {
-                    $timeAgo = $interval->d . ' days ago';
-                  } elseif ($interval->h > 0) {
-                    $timeAgo = $interval->h . ' hours ago';
-                  } elseif ($interval->i > 0) {
-                    $timeAgo = $interval->i . ' minutes ago';
-                  } else {
-                    $timeAgo = 'Just now';
+                    if ($interval->y > 0) {
+                      $timeAgo = $interval->y . ' years ago';
+                    } elseif ($interval->m > 0) {
+                      $timeAgo = $interval->m . ' months ago';
+                    } elseif ($interval->d > 0) {
+                      $timeAgo = $interval->d . ' days ago';
+                    } elseif ($interval->h > 0) {
+                      $timeAgo = $interval->h . ' hours ago';
+                    } elseif ($interval->i > 0) {
+                      $timeAgo = $interval->i . ' minutes ago';
+                    } else {
+                      $timeAgo = 'Just now';
+                    }
+                    echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                   }
-                  echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
-                }
-                ?>
+                  ?>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         <?php endforeach; ?>
       </div>

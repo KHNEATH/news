@@ -185,8 +185,8 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                                 // Database connection
                                 $servername = "localhost";
                                 $username = "root";
-                                $password = "root";
-                                $dbname = "newssystem";
+                                $password = "";
+                                $dbname = "newssystem2";
 
                                 // Create connection
                                 $conn = new mysqli($servername, $username, $password, $dbname);

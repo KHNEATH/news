@@ -25,26 +25,56 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
           <li class="nav-item mx-3">
             <a class="nav-link" href="../pages/about.php">ABOUT</a>
           </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-red" href="../pages/contact.php">CONTACT</a>
-          </li>
+          <?php if ($_SESSION['role'] === 'user') { ?>
+            <li class="nav-item mx-3">
+              <a class="nav-link text-red" href="../pages/contact.php">CONTACT</a>
+            </li>
+          <?php } ?>
           <?php if ($_SESSION['role'] === 'admin') { ?>
             <li class="nav-item mx-3">
               <a class="btn btn-info nav-link text-red" href="../admin/post.php">POST</a>
             </li>
           <?php } ?>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-red" href="../admin/feedback.php">FEEDBACK</a>
-          </li>
+          <?php if ($_SESSION['role'] === 'admin') { ?>
+            <li class="nav-item mx-3">
+              <a class="nav-link text-red" href="../admin/feedback.php">FEEDBACK</a>
+            </li>
+          <?php } ?>
           <?php if ($_SESSION['role'] === 'user') { ?>
             <li class="nav-item mx-3">
               <a class="nav-link text-red" href="../pages/favorite.php">FAVORITE</a>
             </li>
           <?php } ?>
         </ul>
-        <div class="d-flex align-items-center m-2">
-          <img src="img/images.jpg" class="rounded-circle" style="width: 40px;" alt="Avatar" />
+        <?php
+        // session_start();
+        require '../include/dbconn.php'; // Include the database connection file
+
+        $userid = $_SESSION['userid'] ?? null;
+        $user_data = null;
+
+        if ($userid) {
+          try {
+            $stmt = $dbh->prepare("SELECT * FROM registered WHERE id = ?");
+            $stmt->execute([$userid]);
+            $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+          } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage());
+          }
+        }
+
+        $defaultImagePath = 'User.jpg';
+
+        $profileImagePath = $user_data['profile'] ?? $defaultImagePath;
+
+        ?>
+
+        <div class="avatar avatar-online mx-2">
+          <img src="../uploads/<?php echo $profileImagePath; ?>" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" alt="Profile Picture">
         </div>
+
+
+
         <form class="d-flex">
           <a href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? 'admininfo.php' : 'userinfo.php'; ?>?userid=<?php echo $_SESSION['userid']; ?>" class="btn btn-success me-2 d-flex align-items-center"> <?php echo $_SESSION['role'] ?></a>
           <a href="../include/logout.php?role=<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>" class="btn btn-danger">Logout</a>
@@ -79,6 +109,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
           <li class="nav-item mx-3">
             <a class="nav-link text-red" href="../pages/contact.php">CONTACT</a>
           </li>
+
         </ul>
         <form class="d-flex">
           <a href="../login.php" class="btn btn-outline-secondary me-2">Login</a>

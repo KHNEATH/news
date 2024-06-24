@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <!-- Email input -->
           <div class="form-outline mb-4">
             <label class="form-label" for="form3Example3">Email address</label>
-            <input placeholder="Please enter your email" type="email" name="email" id="form3Example3" class="form-control" />
+            <input placeholder="Please enter your email" type="email" name="email" id="form3Example3" class="form-control"/>
           </div>
           <!-- Phone input -->
           <div class="form-outline mb-4">
