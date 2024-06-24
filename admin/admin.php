@@ -68,9 +68,6 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px">
       <h3>NEWS</h3>
     </div>
-    <!-- category -->
-    <div class="container">
-    </div>
 
     <?php
     try {
@@ -83,57 +80,56 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     } catch (PDOException $e) {
       echo "Connection failed: " . $e->getMessage();
     }
-
-
     ?>
     <div class="container">
       <div class="row">
         <?php foreach ($result as $row) : ?>
           <div class="col-lg-3 col-sm-12 mb-2">
-            <div class="card h-100">
-              <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
-              </div>
-              <div class="card-footer">
-                <?php
-                if (isset($row['created_at'])) {
-                  $createdDate = new DateTime($row['created_at']);
-                  $now = new DateTime();
-                  $interval = $now->diff($createdDate);
+            <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
+            <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
+              <div class="card h-100">
+                <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                  <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
+                </div>
+                <div class="card-footer">
+                  <?php
+                  if (isset($row['created_at'])) {
+                    $createdDate = new DateTime($row['created_at']);
+                    $now = new DateTime();
+                    $interval = $now->diff($createdDate);
 
-                  if ($interval->y > 0) {
-                    $timeAgo = $interval->y . ' years ago';
-                  } elseif ($interval->m > 0) {
-                    $timeAgo = $interval->m . ' months ago';
-                  } elseif ($interval->d > 0) {
-                    $timeAgo = $interval->d . ' days ago';
-                  } elseif ($interval->h > 0) {
-                    $timeAgo = $interval->h . ' hours ago';
-                  } elseif ($interval->i > 0) {
-                    $timeAgo = $interval->i . ' minutes ago';
-                  } else {
-                    $timeAgo = 'Just now';
+                    if ($interval->y > 0) {
+                      $timeAgo = $interval->y . ' years ago';
+                    } elseif ($interval->m > 0) {
+                      $timeAgo = $interval->m . ' months ago';
+                    } elseif ($interval->d > 0) {
+                      $timeAgo = $interval->d . ' days ago';
+                    } elseif ($interval->h > 0) {
+                      $timeAgo = $interval->h . ' hours ago';
+                    } elseif ($interval->i > 0) {
+                      $timeAgo = $interval->i . ' minutes ago';
+                    } else {
+                      $timeAgo = 'Just now';
+                    }
+                    echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                   }
-                  echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
-                }
-                ?>
+                  ?>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         <?php endforeach; ?>
       </div>
     </div>
 
+
     <!-- border -->
     <div style="border-bottom: 6px solid #ffd93d; width: 100%; margin-top: 10px"></div>
     <!-- paragraph detail -->
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px">
-      <h3>Hot News</h3>
-    </div>
-    <!-- category -->
-    <div class="container">
+      <h3>News</h3>
     </div>
     <?php
     try {
@@ -151,37 +147,40 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
       <div class="row">
         <?php foreach ($result as $row) : ?>
           <div class="col-lg-3 col-sm-12 mb-2">
-            <div class="card h-100">
-              <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                <p class="card-text"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
-              </div>
-              <div class="card-footer">
-                <?php
-                if (isset($row['created_at'])) {
-                  $createdDate = new DateTime($row['created_at']);
-                  $now = new DateTime();
-                  $interval = $now->diff($createdDate);
+            <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
+            <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
+              <div class="card h-100">
+                <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                  <p class="card-text lh-base text-break"><?php echo htmlspecialchars($row['text']); ?></p>
+                </div>
+                <div class="card-footer">
+                  <?php
+                  if (isset($row['created_at'])) {
+                    $createdDate = new DateTime($row['created_at']);
+                    $now = new DateTime();
+                    $interval = $now->diff($createdDate);
 
-                  if ($interval->y > 0) {
-                    $timeAgo = $interval->y . ' years ago';
-                  } elseif ($interval->m > 0) {
-                    $timeAgo = $interval->m . ' months ago';
-                  } elseif ($interval->d > 0) {
-                    $timeAgo = $interval->d . ' days ago';
-                  } elseif ($interval->h > 0) {
-                    $timeAgo = $interval->h . ' hours ago';
-                  } elseif ($interval->i > 0) {
-                    $timeAgo = $interval->i . ' minutes ago';
-                  } else {
-                    $timeAgo = 'Just now';
+                    if ($interval->y > 0) {
+                      $timeAgo = $interval->y . ' years ago';
+                    } elseif ($interval->m > 0) {
+                      $timeAgo = $interval->m . ' months ago';
+                    } elseif ($interval->d > 0) {
+                      $timeAgo = $interval->d . ' days ago';
+                    } elseif ($interval->h > 0) {
+                      $timeAgo = $interval->h . ' hours ago';
+                    } elseif ($interval->i > 0) {
+                      $timeAgo = $interval->i . ' minutes ago';
+                    } else {
+                      $timeAgo = 'Just now';
+                    }
+                    echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                   }
-                  echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
-                }
-                ?>
+                  ?>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         <?php endforeach; ?>
       </div>
