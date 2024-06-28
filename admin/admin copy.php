@@ -23,61 +23,9 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     $title = 'Admin';
     include('../include/header.php') ?>
   </head>
-  <style>
-    .no-underline {
-      text-decoration: none;
-      color: inherit;
-      /* Maintain the original color of the text */
-    }
-
-    .no-underline:hover {
-      text-decoration: underline;
-      /* Optional: underline on hover */
-    }
-
-
-    .card {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      max-width: 600px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .card-body {
-      position: relative;
-    }
-
-    .card-text {
-      font-size: 1em;
-      line-height: 1.5;
-      word-wrap: break-word;
-      max-height: 4.5em;
-      /* Adjust this value based on your needs */
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    @media (max-width: 768px) {
-      .card-text {
-        font-size: 0.9em;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .card-text {
-        font-size: 0.8em;
-      }
-    }
-  </style>
   <!-- navbar -->
 
-  <body>
-    <!-- navbar -->
+  <!-- <body>
     <?php include('../include/navbar.php') ?>
 
     <!-- carousel -->
@@ -112,18 +60,19 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     </div>
     <!-- paragraph detail -->
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px; margin-bottom: 45px">
-      <h3>WELCOME TO INTERNAL AUDIT UNIT</h3>
+      <h3>WELCOME TO SNAKE NEWS</h3>
     </div>
     <!-- border -->
     <div style="border-bottom: 6px solid #ffd93d; width: 100%; margin-top: 10px"></div>
     <!-- paragraph detail -->
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px">
-      <h3>Hot News</h3>
+      <h3>HOT NEWS</h3>
     </div>
+
     <?php
     try {
       // Query to fetch data
-      $sql = "SELECT * FROM post ORDER BY id DESC";
+      $sql = "SELECT * FROM post ORDER BY id DESC limit 4 ";
       $stmt = $dbh->query($sql);
 
       // Fetch data
@@ -185,7 +134,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <?php
     try {
       // Query to fetch data
-      $sql = "SELECT * FROM post ORDER BY id DESC ";
+      $sql = "SELECT * FROM post ORDER BY id DESC limit 4 ";
       $stmt = $dbh->query($sql);
 
       // Fetch data
@@ -203,8 +152,8 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
               <div class="card h-100">
                 <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
                 <div class="card-body">
-                  <h6><?php echo htmlspecialchars($row['title']); ?></h6>
-                  <p class="card-text lh-base text-break"><?php echo htmlspecialchars($row['text']); ?></p>
+                  <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                  <p class="card-text lh-base text-break"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
                 </div>
                 <div class="card-footer">
                   <?php
@@ -264,7 +213,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <?php
     include('../include/footer.php')
     ?>
-  </body>
+  </body> -->
 
   </html>
 <?php } ?>

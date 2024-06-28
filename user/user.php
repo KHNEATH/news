@@ -81,24 +81,24 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <?php include('../include/navbar.php') ?>
 
     <!-- carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide m-auto mt-2 carouselimg" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide m-auto mt-3 carouselimg container" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
       </div>
-      <div class="carousel-inner">
+      <div class="carousel-inner rounded-3 shadow-lg" style="object-fit: cover; height: 100vh;">
         <div class="carousel-item active">
-          <img src="https://marketplace.canva.com/EAFMBRX08aA/2/0/1600w/canva-modern-red-yellow-breaking-news-intro-animation-video-UIT1LgQx_rA.jpg
-            " class="d-block w-100" alt="..." />
+          <img src="../images/2437919817_730789099252642_4101091192374117017_n.jpg   
+            " class="d-block w-100" alt="..." style="object-fit: cover;" />
         </div>
         <div class="carousel-item">
-          <img src="https://t4.ftcdn.net/jpg/04/26/47/69/360_F_426476994_6XuB8NIGYGLbQUkFITCKwjKiVUe2eOYa.jpg
-            " class="d-block w-100" alt="..." />
+          <img src="../images/238691778_136987331958452_1400618763356975659_n.jpg
+            " class="d-block w-100" alt="..." style="object-fit: cover;" />
         </div>
-        <div class="carousel-item">
-          <img src="https://marketplace.canva.com/EAFfT3S71Oc/1/0/1600w/canva-red-blue-modern-breaking-news-youtube-thumbnail-qJRhA0AmHOw.jpg
-            " class="d-block w-100" alt="..." />
+        <div class="carousel-item" style="object-fit: cover;">
+          <img src="../images/437919817_730789099252642_4101091192374117017_n.jpg
+            " class="d-block w-100" alt="..." style="object-fit: cover;" />
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -112,7 +112,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     </div>
     <!-- paragraph detail -->
     <div class="d-flex flex-column align-items-center" style="margin-top: 45px; margin-bottom: 45px">
-      <h3>WELCOME TO SNAKE NEWS</h3>
+      <h3>WELCOME TO INTERNAL AUDIT UNIT</h3>
     </div>
     <!-- border -->
     <div style="border-bottom: 6px solid #ffd93d; width: 100%; margin-top: 10px"></div>
@@ -123,7 +123,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <?php
     try {
       // Query to fetch data
-      $sql = "SELECT * FROM post ORDER BY id DESC limit 4 ";
+      $sql = "SELECT * FROM post ORDER BY id DESC";
       $stmt = $dbh->query($sql);
 
       // Fetch data
@@ -142,7 +142,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
                 <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                  <p class="card-text"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
+                  <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
                 </div>
                 <div class="card-footer">
                   <?php
@@ -185,7 +185,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <?php
     try {
       // Query to fetch data
-      $sql = "SELECT * FROM post ORDER BY id DESC limit 4 ";
+      $sql = "SELECT * FROM post ORDER BY id DESC";
       $stmt = $dbh->query($sql);
 
       // Fetch data
@@ -204,7 +204,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
                 <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
-                  <p class="card-text lh-base text-break"><?php echo $row['id']; ?><?php echo htmlspecialchars($row['text']); ?></p>
+                  <p class="card-text lh-base text-break"><?php echo htmlspecialchars($row['text']); ?></p>
                 </div>
                 <div class="card-footer">
                   <?php

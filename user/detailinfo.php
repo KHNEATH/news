@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error adding post to favorites";
     }
-} 
+}
 
 ?>
 
@@ -65,7 +65,7 @@ description. -->
             <div class="card col-lg-4 col-md-4 col-12 my-5 shadow-sm rounded-3">
                 <div class="list-group border-0">
                     <div class="list-group-item border-0 mt-3 rounded fs-4 bg-light">
-                        <h3 class="text-center mb-0 text-info"><?php echo $lastselect['title']; ?></h3>
+                        <h6 class="text-center mb-0 text-info"><?php echo $lastselect['title']; ?></h6>
                     </div>
                 </div>
                 <div class="list-group-item border-0 text-dark fs-5 bg-light">
@@ -96,20 +96,20 @@ description. -->
             <div class="col-lg-8 col-md-8 col-12 my-5 shadow-sm rounded-3">
                 <div class="list-group border-0">
                     <div class="list-group-item border-0 mt-3 rounded fs-4 bg-light" style="background-color:#394867">
-                        <h3 class='text-center mb-0 text-info'>
+                        <h5 class='text-center mb-0 text-info'>
                             <?php echo date('D-m-Y, h:i A', strtotime($lastselect['created_at'])); ?>
-                        </h3>
+                        </h5>
                     </div>
                     <div class="list-group-item fs-5 lead">
                         <div class="d-flex flex-column">
-                            <h5 class="text-center mb-0" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
+                            <p class="text-center mb-0 dark-text" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word ;">
                                 <?php echo htmlspecialchars($lastselect['text']); ?>
-                            </h5>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer text-end bg-light">
-                    <form  method="post">
+                    <form method="post">
                         <input type="hidden" name="postId" value="<?php echo htmlspecialchars($lastselect['id']); ?>">
                         <button type="submit" class="add-to-favorite">Add to favorite</button>
                     </form>

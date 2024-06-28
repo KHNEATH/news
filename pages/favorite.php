@@ -34,12 +34,14 @@ $favorites = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include('../include/navbar.php'); ?>
 
     <div class="container">
-    <?php if (isset($msg)){ ?>
-<div class="alert alert-primary" role="alert">
-    <?php echo $msg ?>
-</div>
-<?php } ?>
+        <?php if (isset($msg)) { ?>
+            <div class="alert alert-primary" role="alert">
+                <?php echo $msg ?>
+            </div>
+        <?php } ?>
+        <div class="mt-3"></div>
         <h1>Favorites</h1>
+        <div class="mt-3"></div>
         <ul class="list-group ">
             <?php
             // Check if $favorites is not empty

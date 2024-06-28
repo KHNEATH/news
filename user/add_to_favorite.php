@@ -2,7 +2,7 @@
 session_start();
 
 // Check if the user is authenticated
-if (empty($_SESSION['userid'])) {
+if (!empty($_SESSION['userid'])) {
     header('location: ../index.php'); // Redirect to login page
     exit();
 }

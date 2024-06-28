@@ -9,7 +9,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom-1">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
-        <img src="https://media4.s-nbcnews.com/i/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.png" alt="" height="60px" />
+        <img src="../images/cropped-Official-iau-logo2.png" alt="News Website Logo" class="logo" alt="" height="60px" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -90,7 +90,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom-1">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
-        <img src="https://media4.s-nbcnews.com/i/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.png" alt="" height="60px" />
+        <img src="../images/cropped-Official-iau-logo2.png" alt="News Website Logo" class="logo" alt="" height="60px" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

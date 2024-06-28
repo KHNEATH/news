@@ -37,7 +37,9 @@ if (isset($_POST['delete'])) {
 
 <body>
     <?php include('../include/navbar.php'); ?>
+    <div class="mt-3"></div>
     <h1>Feedback from Users</h1>
+    <div class="mt-3"></div>
     <?php if (isset($contacts) && !empty($contacts)) { ?>
         <table class="table">
             <tr>

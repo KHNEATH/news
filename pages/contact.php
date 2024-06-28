@@ -4,11 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include('../include/dbconn.php');
 
-if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
-  header('location: ../index.php');
-  exit(); // Terminate script after redirect
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $firstname = $_POST['first_name'];
   $lastname = $_POST['last_name'];
@@ -47,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div class="container-fluid" style="background-color: white">
     <div class="row p-5 align-items-center">
       <div class="col-lg-6 d-flex justify-content-center">
-        <img src="https://marketplace.canva.com/EAFMBRX08aA/2/0/1600w/canva-modern-red-yellow-breaking-news-intro-animation-video-UIT1LgQx_rA.jpg" alt="" style="width: 45%" />
+        <img src="../images/cropped-Official-iau-logo2.png" alt="" style="width: 45%" />
       </div>
       <div class="col-lg-6">
         <h3 class="my-3">Feedback</h3>
@@ -71,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <!-- Email input -->
           <div class="form-outline mb-4">
             <label class="form-label" for="form3Example3">Email address</label>
-            <input placeholder="Please enter your email" type="email" name="email" id="form3Example3" class="form-control"/>
+            <input placeholder="Please enter your email" type="email" name="email" id="form3Example3" class="form-control" />
           </div>
           <!-- Phone input -->
           <div class="form-outline mb-4">

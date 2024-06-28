@@ -11,118 +11,122 @@
   <?php include('../include/navbar.php') ?>
   <!-- navbar -->
   <div class="d-flex flex-column align-items-center justify-content-center p-3">
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/8U7gkFSZsAA?si=X4-V2kEiGdVxyXx4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div id="media_image-16" class="mg-widget widget_media_image"><img width="640" height="702" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/photo_HE-mef-933x1024.jpg" class="image wp-image-935  attachment-large size-large" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/photo_HE-mef-933x1024.jpg 933w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/photo_HE-mef-273x300.jpg 273w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/photo_HE-mef-768x843.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/photo_HE-mef.jpg 1166w" sizes="(max-width: 640px) 100vw, 640px"></div>
+    <div class="mt-3"></div>
+    <div id="media_image-17" class="mg-widget widget_media_image"><img width="640" height="559" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-1024x894.jpg" class="image wp-image-1411  attachment-large size-large" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-1024x894.jpg 1024w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-300x262.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-768x670.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-1536x1341.jpg 1536w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-2048x1788.jpg 2048w" sizes="(max-width: 640px) 100vw, 640px"></div>
+  </div>
+
+  <div class="container mt-5">
+    <!-- First Card Box -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h6>ដំណឹងផ្សេងៗ</h6>
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-unstyled">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/%e1%9e%9f%e1%9f%81%e1%9e%9b%e1%9e%80%e1%9f%92%e1%9e%8f%e1%9e%b8%e1%9e%94%e1%9f%92%e1%9e%9a%e1%9e%80%e1%9e%b6%e1%9e%9f%e1%9e%96%e1%9f%90%e1%9e%8f%e1%f8%8c%e1%9e%98%e1%9e%b6%e1%9e%93/" target="_blank" rel="noopener">សេចក្តីប្រកាសព័ត៌មាន</a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/%e1%9e%8a%e1%9f%86%e1%9e%8e%e1%9e%b9%e1%9e%84%e1%9e%87%e1%9f%92%e1%9e%9a%e1%9e%be%e1%9e%9f%e1%9e%9a%e1%9e%9e%e1%9e%9f%e1%9e%9a%e1%9e%9e%e1%9e%9b%e1%9e%80%e1%9e%b6%e1%9e%80/" target="_blank" rel="noopener">ដំណឹងជ្រើសរើសបុគ្គលិក</a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/eZvFBP2kzw8?si=Bun424NZoKZlDjgm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <!-- Second Card Box -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h6>កម្មវិធីសង្គម</h6>
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-unstyled">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/iau-charity-24-apr-24/" target="_blank" rel="noopener"><strong>កម្មវិធីសប្បុរសធម៌នៅអង្គការវិទ្យាស្ថានអភិវឌ្ឍន៍វប្បធម៌ខ្មែរ-ខេត្តកំពត</strong></a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/internal-audit-unit-charity/" target="_blank" rel="noopener"><strong>កម្មវិធីសប្បុរសធម៌នៅអង្គការសប្បុរសធម៌កម្ពុជកុលបុត្រ-ខេត្តសៀមរាប</strong></a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/news/charity_27-apr-23/" target="_blank" rel="noopener"><strong>កម្មវិធីសប្បុរសធម៌នៅអង្គការវិទ្យាស្ថានអភិវឌ្ឍន៍វប្បធម៌ខ្មែរ-ខេត្តកំពត</strong></a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/wp-content/uploads/2023/03/%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%94%E1%9F%92%E1%9E%94%E1%9E%BB%E1%9E%9A%E1%9E%9F%E1%9E%92%E1%9E%98%E1%9F%8C%E1%9E%93%E1%9F%85%E1%9E%98%E1%9E%87%E1%9F%92%E1%9E%88%E1%9E%98%E1%9E%8E%E1%9F%92%E1%9E%8C%E1%9E%9B%E1%9E%94%E1%9E%BB%E1%9E%9A%E1%9E%B8%E1%9E%80%E1%9E%BB%E1%9E%98%E1%9E%B6%E1%9E%9A%E2%80%8B%E1%9E%94%E1%9E%B6%E1%9E%8F%E1%9F%8B%E1%9E%8A%E1%9F%86%E1%9E%94%E1%9E%84.pdf" target="_blank" rel="noopener"><strong>កម្មវិធីសប្បុរសធម៌នៅមជ្ឈមណ្ឌលបុរីកុមារកំព្រាបាត់ដំបង១</strong></a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/wp-content/uploads/2022/11/IAU-Charity.pdf " target="_blank" rel="noopener"><strong>កម្មវិធីសប្បរសធម៌នៅមជ្ឈមណ្ឌលសហសង្គ្រោះកម្ពុជា-ខេត្តសៀមរាប</strong></a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <a href="https://iauoffsa.gov.kh/news/%e1%9e%80%e1%9e%98%e1%9f%92%e1%9e%98%e1%9e%9c%e1%9e%b7%e1%9e%92%e1%9e%b8%e1%9e%9f%e1%9e%94%e1%9f%92%e1%9e%94%e1%9e%bb%e1%9e%9a%e1%9e%9f%e1%9e%92%e1%9e%98%e1%9f%8c%e1%9e%93%e1%9f%85%e1%9e%98%e1%9e%87/" target="_blank" rel="noopener"><strong>កម្មវិធីសប្បុរសធម៍នៅមជ្ឈមណ្ឌលកុមារកំព្រាខេត្តសៀមរាប</strong></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Third Card Box -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h6>តំណរភ្ជាប់ទៅកាន់គេហទំព័រផ្សេងទៀត</h6>
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-unstyled">
+          <li class="m-2">
+            <a href="https://mef.gov.kh/" target="_blank" rel="noopener"><strong>ក្រសួងសេដ្ឋកិច្ចនិងហិរញ្ញវត្ថុ (Ministry of Economy and Finance)</strong></a>
+            <a href="https://mef.gov.kh/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq-150x150.jpg" alt="" width="35" height="35" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq-300x300.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq-1024x1024.jpg 1024w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq-768x768.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq-1536x1536.jpg 1536w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/aq.jpg 1926w" sizes="(max-width: 35px) 100vw, 35px"></a>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://www.facebook.com/GDFI.MEF/" target="_blank" rel="noopener">អគ្គលេខាធិការដ្ឋាននៃ អ.ស.ហ. (Non Bank Financial Services Authority)</a></strong>
+            <strong><a href="https://www.facebook.com/GDFI.MEF/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1447" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/logo_2_2-150x150.jpg" alt="" width="33" height="33" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/logo_2_2-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/logo_2_2-300x300.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/logo_2_2-1024x1024.jpg 1024w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/logo_2_2-768x768.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/logo_2_2.jpg 1307w" sizes="(max-width: 33px) 100vw, 33px"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://www.serc.gov.kh/khmer/" target="_blank" rel="noopener">និយ័តករមូលបត្រកម្ពុជា​ (Securities and Exchange Regulator of Cambodia)</a></strong>
+            <strong><a href="https://www.serc.gov.kh/khmer/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1213" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករមូលបត្រកម្ពុជា-150x150.jpg" alt="" width="35" height="35" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករមូលបត្រកម្ពុជា-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករមូលបត្រកម្ពុជា-300x300.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករមូលបត្រកម្ពុជា.jpg 536w" sizes="(max-width: 35px) 100vw, 35px"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://www.trustregulator.gov.kh/" target="_blank" rel="noopener">និយ័តករបរធនបាលកិច្ច (Trust Regulator)</a></strong>
+            <strong><a href="https://www.trustregulator.gov.kh/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1219" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករបរធនបាលកិច្ច-150x150.jpg" alt="" width="35" height="35" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករបរធនបាលកិច្ច-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករបរធនបាលកិច្ច-300x300.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករបរធនបាលកិច្ច-768x767.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/និយ័តករបរធនបាលកិច្ច.jpg 959w" sizes="(max-width: 35px) 100vw, 35px"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://gdia.mef.gov.kh/" target="_blank" rel="noopener">អគ្គនាយកដ្ឋានសវនកម្មផ្ទៃក្នុង (General Department of Internal Audit)</a></strong>
+            <strong><a href="https://gdia.mef.gov.kh/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1215" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/blue-logo.png" alt="" width="33" height="33"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://irc.gov.kh/" target="_blank" rel="noopener">និយ័តករធានារ៉ាប់រងកម្ពុជា (Insurance Regulator of Cambodia)</a></strong>
+            <strong><a href="https://irc.gov.kh/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1216" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/217641857_2316705008461633_3704749906702408975_n-150x150.jpg" alt="" width="35" height="35" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/217641857_2316705008461633_3704749906702408975_n-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/217641857_2316705008461633_3704749906702408975_n-300x300.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/217641857_2316705008461633_3704749906702408975_n-1024x1024.jpg 1024w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/217641857_2316705008461633_3704749906702408975_n-768x768.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/217641857_2316705008461633_3704749906702408975_n.jpg 1250w" sizes="(max-width: 35px) 100vw, 35px"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://www.acar.gov.kh/" target="_blank" rel="noopener">និយ័តករគណនេយ្យនិងសវនកម្ម (Accounting and Auditing Regulator)</a></strong>
+            <strong><a href="https://www.acar.gov.kh/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1218" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/Accounting-and-Auditing-Regulator-150x150.jpg" alt="" width="35" height="35" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/07/Accounting-and-Auditing-Regulator-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/07/Accounting-and-Auditing-Regulator.jpg 300w" sizes="(max-width: 35px) 100vw, 35px"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://www.facebook.com/REBPR" target="_blank" rel="noopener">និយ័តករអាជីវកម្មអចលនវត្ថុ និងបញ្ចាំ (Real Estate Business and Pawnshop Regulator)</a></strong>
+            <strong><a href="https://www.facebook.com/REBPR" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1448" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/Rebpr_logo-150x150.jpg" alt="" width="34" height="34" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/Rebpr_logo-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/Rebpr_logo-300x300.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/Rebpr_logo.jpg 500w" sizes="(max-width: 34px) 100vw, 34px"></a></strong>
+          </li>
+          <hr class="mb-0 mt-0">
+          <li class="m-2">
+            <strong><a href="https://ssr.gov.kh/" target="_blank" rel="noopener">និយ័តករសន្តិសុខសង្គម (Social Security Regulator)</a></strong>
+            <strong><a href="https://goo.gl/maps/aJ8gSvCRi1qvpFQ6A" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignleft wp-image-1449" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/SSR_logo1-150x150.jpg" alt="" width="35" height="35" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/SSR_logo1-150x150.jpg 150w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/SSR_logo1-289x300.jpg 289w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/SSR_logo1.jpg 632w" sizes="(max-width: 35px) 100vw, 35px"></a></strong>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="text-center text-lg-start bg-light text-muted">
-    <!-- Section: Social media -->
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-      <!-- Left -->
-      <div class="me-5 d-none d-lg-block">
-        <span>Get connected with us on social networks:</span>
-      </div>
-      <!-- Left -->
-
-      <!-- Right -->
-      <div>
-        <a href="" class="me-4 text-reset">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"></path>
-          </svg>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3Z"></path>
-          </svg>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.74-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .38z"></path>
-          </svg>
-        </a>
-        <a href="" class="me-4 text-reset">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M19 22q-1.65 0-2.825-1.175T15 18v-4.5q0-1.05.725-1.775T17.5 11q1.05 0 1.775.725T20 13.5V18h-2v-4.5q0-.2-.15-.35T17.5 13q-.2 0-.35.15t-.15.35V18q0 .825.588 1.413T19 20q.825 0 1.413-.588T21 18v-4h2v4q0 1.65-1.175 2.825T19 22ZM3 18q-.825 0-1.413-.588T1 16V4q0-.825.588-1.413T3 2h16q.825 0 1.413.588T21 4v6h-3.5q-1.45 0-2.475 1.025T14 13.5V18H3Zm8-7l8-5V4l-8 5l-8-5v2l8 5Z"></path>
-          </svg>
-        </a>
-      </div>
-      <!-- Right -->
-    </section>
-    <!-- Section: Social media -->
-
-    <!-- Section: Links  -->
-    <section class="">
-      <div class="container text-center text-md-start mt-5">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <!-- Content -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i>snakenews
-            </h6>
-            <p>
-              Here you can use rows and columns to organize your footer
-              content. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit.
-            </p>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">News</h6>
-            <p>
-              <a href="#!" class="text-reset">BUSINESS</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">SPORT</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">HEALTH</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">TRAVEL</a>
-            </p>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-            <p>
-              <i class="fas fa-home me-3"></i> Phnom Penh,12st, Cambodia
-            </p>
-            <p>
-              <i class="fas fa-envelope me-3"></i>
-              snakenews@gmail.com
-            </p>
-            <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-          </div>
-          <!-- Grid column -->
-        </div>
-        <!-- Grid row -->
-      </div>
-    </section>
-    <!-- Section: Links  -->
-
-    <!-- Copyright -->
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
-      © 2024 Copyright:
-      <a class="text-reset fw-bold" href="">CAMBODIASNAKENEWS2024</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
+  <?php include('../include/footer.php') ?>
   <!-- Footer -->
 </body>
 

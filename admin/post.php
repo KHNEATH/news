@@ -171,61 +171,62 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                         </div>
 
                         <h2>Manage Posts</h2>
-                        <table class="table table-striped table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Text</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // Database connection
-                                $servername = "localhost";
-                                $username = "root";
-                                $password = "";
-                                $dbname = "newssystem2";
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col" class="col-2">Title</th>
+                                        <th scope="col" class="col-8">Text</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Database connection
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "";
+                                    $dbname = "newssystem2";
 
-                                // Create connection
-                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                    // Create connection
+                                    $conn = new mysqli($servername, $username, $password, $dbname);
 
-                                // Check connection
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                }
+                                    // Check connection
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
 
-                                // Fetch posts
-                                $sql = "SELECT id, title, text FROM post";
-                                $result = $conn->query($sql);
+                                    // Fetch posts
+                                    $sql = "SELECT id, title, text FROM post";
+                                    $result = $conn->query($sql);
 
-                                if ($result->num_rows > 0) {
-                                    // Output data of each row
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>
+                                    if ($result->num_rows > 0) {
+                                        // Output data of each row
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>
                                             <th scope='row'>" . htmlspecialchars($row['id']) . "</th>
                                             <td>" . htmlspecialchars($row['title']) . "</td>
                                             <td class='text-truncate' style='max-width: 300px;'>" . htmlspecialchars($row['text']) . "</td>
                                             <td class='action-buttons'>
-                                                <a class='btn btn-primary' href='edit-post.php?eid=" . htmlspecialchars($row['id']) . "'>Edit</a>
+                                                <a class='btn btn-sm btn-primary' href='edit-post.php?eid=" . htmlspecialchars($row['id']) . "'>Edit</a>
                                                 <form method='post' action='' style='display:inline;'>
                                                     <input type='hidden' name='delete_id' value='" . htmlspecialchars($row['id']) . "'>
-                                                    <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#modalCenter' onclick='setDeleteId(" . htmlspecialchars($row['id']) . ")'>Delete</button>
+                                                    <button type='button' class='btn btn-sm btn-danger' data-bs-toggle='modal' data-bs-target='#modalCenter' onclick='setDeleteId(" . htmlspecialchars($row['id']) . ")'>Delete</button>
                                                 </form>
                                             </td>
                                         </tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='4'>No posts found</td></tr>";
                                     }
-                                } else {
-                                    echo "<tr><td colspan='4'>No posts found</td></tr>";
-                                }
 
-                                // Close connection
-                                $conn->close();
-                                ?>
-                            </tbody>
-                        </table>
-
+                                    // Close connection
+                                    $conn->close();
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- model Detele -->
                         <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
