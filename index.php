@@ -56,10 +56,10 @@
     }
 
     .card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     .card-footer small {
       margin-right: auto;
@@ -217,7 +217,7 @@
                 echo '<small class="text-muted">Posted ' . $timeAgo . '</small>';
               }
               ?>
-              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#shareModal" onclick="setShareData('<?php echo htmlspecialchars($row['title']); ?>', '<?php echo urlencode('https://yourwebsite.com/user/detailinfo.php?id=' . htmlspecialchars($row['id'])); ?>')">
+              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#shareModal<?php echo $row['id']; ?>" onclick="setShareData('<?php echo htmlspecialchars($row['title']); ?>', '<?php echo urlencode('https://yourwebsite.com/user/detailinfo.php?id=' . htmlspecialchars($row['id'])); ?>')">
                 <i class="fas fa-share-alt"></i> Share
               </button>
             </div>
@@ -227,47 +227,56 @@
     </div>
   </div>
 
-  <!-- Share Modal -->
-  <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="shareModalLabel">Share this post</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p id="shareTitle"></p>
-          <div class="d-grid gap-2">
-            <a id="facebookShare" href="#" target="_blank" class="btn btn-primary btn-sm"><i class="fab fa-facebook-f"></i> Facebook</a>
-            <a id="twitterShare" href="#" target="_blank" class="btn btn-info btn-sm"><i class="fab fa-twitter"></i> Twitter</a>
-            <a id="linkedinShare" href="#" target="_blank" class="btn btn-secondary btn-sm"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-            <button id="copyURLButton" class="btn btn-outline-secondary btn-sm"><i class="fas fa-copy"></i> Copy URL</button>
+  <!-- Share Modals -->
+  <?php foreach ($result as $row) : ?>
+    <div class="modal fade" id="shareModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="shareModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="shareModalLabel<?php echo $row['id']; ?>">Share this post</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="shareTitle"></p>
+            <div class="d-grid gap-2">
+              <a id="facebookShare<?php echo $row['id']; ?>" href="#" target="_blank" class="btn btn-primary btn-sm"><i class="fab fa-facebook-f"></i> Facebook</a>
+              <a id="twitterShare<?php echo $row['id']; ?>" href="#" target="_blank" class="btn btn-info btn-sm"><i class="fab fa-twitter"></i> Twitter</a>
+              <a id="linkedinShare<?php echo $row['id']; ?>" href="#" target="_blank" class="btn btn-secondary btn-sm"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+              <button id="copyURLButton<?php echo $row['id']; ?>" class="btn btn-outline-secondary btn-sm"><i class="fas fa-copy"></i> Copy URL</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <?php endforeach; ?>
 
-  <!-- JavaScript for Share Modal -->
+  <!-- JavaScript for Share Modals -->
   <script>
-    function setShareData(title, url) {
-      document.getElementById('shareTitle').textContent = title;
-      document.getElementById('facebookShare').href = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
-      document.getElementById('twitterShare').href = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + encodeURIComponent(title);
-      document.getElementById('linkedinShare').href = 'https://www.linkedin.com/shareArticle?url=' + url + '&title=' + encodeURIComponent(title);
-    }
+    <?php foreach ($result as $row) : ?>
 
-    function copyToClipboard() {
-      var url = decodeURIComponent(document.getElementById('facebookShare').href.split('u=')[1]);
-      navigator.clipboard.writeText(url).then(function() {
-        alert('URL copied to clipboard!');
-      }, function(err) {
-        console.error('Could not copy text: ', err);
-      });
-    }
+      function setShareData(title, url) {
+        document.getElementById('shareTitle<?php echo $row['id']; ?>').textContent = title;
+        document.getElementById('facebookShare<?php echo $row['id']; ?>').href = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+        document.getElementById('twitterShare<?php echo $row['id']; ?>').href = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + encodeURIComponent(title);
+        document.getElementById('linkedinShare<?php echo $row['id']; ?>').href = 'https://www.linkedin.com/shareArticle?url=' + url + '&title=' + encodeURIComponent(title);
+      }
 
-    document.getElementById('copyURLButton').addEventListener('click', copyToClipboard);
+      function copyToClipboard<?php echo $row['id']; ?>() {
+        var url = decodeURIComponent(document.getElementById('facebookShare<?php echo $row['id']; ?>').href.split('u=')[1]);
+        navigator.clipboard.writeText(url).then(function() {
+          alert('URL copied to clipboard!');
+        }, function(err) {
+          console.error('Could not copy text: ', err);
+        });
+      }
+
+      document.getElementById('copyURLButton<?php echo $row['id']; ?>').addEventListener('click', copyToClipboard<?php echo $row['id']; ?>);
+    <?php endforeach; ?>
   </script>
+
+  <!-- Footer -->
+  <?php include('include/footer.php') ?>
+
 </body>
 
 </html>
