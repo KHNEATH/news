@@ -22,6 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = !empty($_POST['id']) && is_numeric($_POST['id']) ? (int)$_POST['id'] : null;
     $profile = !empty($_POST['profile']) ? htmlspecialchars($_POST['profile']) : null;
 
+    if (!isset($_SESSION['userid']) || empty($_SESSION['userid'])) {
+        echo "You must be logged in to add to favorites.";
+        exit();
+    }
+
     if ($title && $id && $profile) {
         try {
             // Prepare an SQL statement for execution
@@ -89,7 +94,12 @@ try {
                 <label for="profile">Profile:</label>
                 <input type="text" class="form-control" id="profile" name="profile" required>
             </div>
-            <button type="submit" class="btn btn-primary">Add to Favorites</button>
+            <?php
+            if (isset($_SESSION['userid']) || !empty($_SESSION['userid'])) { ?>
+                <button type="submit" class="btn btn-primary">Add to Favorites</button>
+            <?php } else { ?>
+
+            <?php } ?>
         </form>
 
         <ul class="list-group mt-4">

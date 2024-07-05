@@ -1,3 +1,39 @@
+<?php
+include('../include/dbconn.php');
+
+// Initialize variables
+$newsId = 1; // Assuming this is the ID of the news item to display
+
+// Check if session variable is not set (indicating first visit in this session)
+// if (!isset($_SESSION['visited'])) {
+//     try {
+//         // Increment view count in database
+//         $incrementViewCountStmt = $dbh->prepare("UPDATE viewer SET view_count = view_count + 1 WHERE id = :id");
+//         $incrementViewCountStmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+//         $incrementViewCountStmt->execute();
+
+//         // Set session variable to indicate visit
+//         $_SESSION['visited'] = true;
+//     } catch (PDOException $e) {
+//         die('Database error: ' . $e->getMessage());
+//     }
+// }
+
+// Fetch the news item to display
+try {
+    $stmt = $dbh->prepare("SELECT * FROM viewer WHERE id = :id");
+    $stmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+    $stmt->execute();
+    $newsItem = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$newsItem) {
+        echo 'News item not found.';
+        exit();
+    }
+} catch (PDOException $e) {
+    die('Database error: ' . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +52,7 @@
     <div id="media_image-17" class="mg-widget widget_media_image"><img width="640" height="559" src="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-1024x894.jpg" class="image wp-image-1411  attachment-large size-large" alt="" style="max-width: 100%; height: auto;" decoding="async" loading="lazy" srcset="https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-1024x894.jpg 1024w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-300x262.jpg 300w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-768x670.jpg 768w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-1536x1341.jpg 1536w, https://iauoffsa.gov.kh/wp-content/uploads/2022/08/HE_1-2048x1788.jpg 2048w" sizes="(max-width: 640px) 100vw, 640px"></div>
   </div>
 
-  <div class="container mt-5">
+  <div class="container mt-4">
     <!-- First Card Box -->
     <div class="card mb-4">
       <div class="card-header">
@@ -25,11 +61,11 @@
       <div class="card-body p-0">
         <ul class="list-unstyled">
           <li class="m-2">
-            <a href="https://iauoffsa.gov.kh/%e1%9e%9f%e1%9f%81%e1%9e%9b%e1%9e%80%e1%9f%92%e1%9e%8f%e1%9e%b8%e1%9e%94%e1%9f%92%e1%9e%9a%e1%9e%80%e1%9e%b6%e1%9e%9f%e1%9e%96%e1%9f%90%e1%9e%8f%e1%f8%8c%e1%9e%98%e1%9e%b6%e1%9e%93/" target="_blank" rel="noopener">សេចក្តីប្រកាសព័ត៌មាន</a>
+            <a href="https://iauoffsa.gov.kh/%e1%9e%9f%e1%9f%81%e1%9e%9b%e1%9e%80%e1%9f%92%e1%9e%8f%e1%9e%b8%e1%9e%94%e1%9f%92%e1%9e%9a%e1%9e%80%e1%9e%b6%e1%9e%9f%e1%9e%96%e1%9f%90%e1%9e%8f%e1%f8%8c%e1%9e%98%e1%9e%b6%e1%9e%93/" target="_blank" rel="noopener"><strong>សេចក្តីប្រកាសព័ត៌មាន</strong></a>
           </li>
           <hr class="mb-0 mt-0">
           <li class="m-2">
-            <a href="https://iauoffsa.gov.kh/%e1%9e%8a%e1%9f%86%e1%9e%8e%e1%9e%b9%e1%9e%84%e1%9e%87%e1%9f%92%e1%9e%9a%e1%9e%be%e1%9e%9f%e1%9e%9a%e1%9e%9e%e1%9e%9f%e1%9e%9a%e1%9e%9e%e1%9e%9b%e1%9e%80%e1%9e%b6%e1%9e%80/" target="_blank" rel="noopener">ដំណឹងជ្រើសរើសបុគ្គលិក</a>
+            <a href="https://iauoffsa.gov.kh/%e1%9e%8a%e1%9f%86%e1%9e%8e%e1%9e%b9%e1%9e%84%e1%9e%87%e1%9f%92%e1%9e%9a%e1%9e%be%e1%9e%9f%e1%9e%9a%e1%9e%9e%e1%9e%9f%e1%9e%9a%e1%9e%9e%e1%9e%9b%e1%9e%80%e1%9e%b6%e1%9e%80/" target="_blank" rel="noopener"><strong>ដំណឹងជ្រើសរើសបុគ្គលិក</strong></a>
           </li>
         </ul>
       </div>

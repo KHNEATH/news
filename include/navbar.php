@@ -17,27 +17,27 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item mx-3">
-            <a class="nav-link" href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? '../admin/admin.php' : '../user/user.php'; ?>">HOME</a>
+            <a class="nav-link" href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? '../admin/admin.php' : '../user/user.php'; ?>"><i class='bx bxs-home bx-tada me-2'></i>HOME</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="../pages/allnews.php">ALL NEWS</a>
+            <a class="nav-link" href="../pages/allnews.php"><i class='bx bx-news bx-tada me-2'></i>ALL NEWS</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="../pages/about.php">ABOUT</a>
           </li>
           <?php if ($_SESSION['role'] === 'user') { ?>
             <li class="nav-item mx-3">
-              <a class="nav-link text-red" href="../pages/contact.php">CONTACT</a>
+              <a class="nav-link text-red" href="../pages/contact.php"><i class='bx bxs-contact bx-tada me-2'></i>CONTACT</a>
             </li>
           <?php } ?>
           <?php if ($_SESSION['role'] === 'admin') { ?>
             <li class="nav-item mx-3">
-              <a class="btn btn-info nav-link text-red" href="../admin/post.php">POST</a>
+              <a class="btn btn-info nav-link text-red" href="../admin/post.php"><i class="bx bx-edit-alt me-2"></i>POST</a>
             </li>
           <?php } ?>
           <?php if ($_SESSION['role'] === 'admin') { ?>
             <li class="nav-item mx-3">
-              <a class="nav-link text-red" href="../admin/feedback.php">FEEDBACK</a>
+              <a class="nav-link text-red" href="../admin/feedback.php"><i class='bx bx-comment-detail bx-tada me-2'></i>FEEDBACK</a>
             </li>
           <?php } ?>
           <?php if ($_SESSION['role'] === 'user') { ?>
@@ -77,7 +77,7 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
 
         <form class="d-flex">
           <a href="<?php echo isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? 'admininfo.php' : 'userinfo.php'; ?>?userid=<?php echo $_SESSION['userid']; ?>" class="btn btn-success me-2 d-flex align-items-center"> <?php echo $_SESSION['role'] ?></a>
-          <a href="../include/logout.php?role=<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>" class="btn btn-danger">Logout</a>
+          <a href="../include/logout.php?role=<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>" class="btn btn-danger"><i class='bx bx-log-out bx-tada me-2'></i>Logout</a>
         </form>
       </div>
     </div>
@@ -98,22 +98,22 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item mx-3">
-            <a class="nav-link" href="../user/user.php">HOME</a>
+            <a class="nav-link" href="../user/user.php"><i class='bx bxs-home bx-tada me-2'></i>HOME</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="../pages/allnews.php">ALL NEWS</a>
+            <a class="nav-link" href="../pages/allnews.php"><i class='bx bx-news bx-tada me-2'></i>ALL NEWS</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="../pages/about.php">ABOUT</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link text-red" href="../pages/contact.php">CONTACT</a>
+            <a class="nav-link text-red" href="../pages/contact.php"><i class='bx bxs-contact bx-tada me-2'></i>CONTACT</a>
           </li>
 
         </ul>
         <form class="d-flex">
-          <a href="../login.php" class="btn btn-outline-secondary me-2">Login</a>
-          <a href="../pages/register.php" class="btn btn-success">Register</a>
+          <a href="../login.php" class="btn btn-outline-secondary me-2"><i class='bx bx-log-in bx-tada me-2'></i>Login</a>
+          <a href="../pages/register.php" class="btn btn-success"><i class='bx bx-registered bx-tada me-2'></i>Register</a>
         </form>
       </div>
     </div>

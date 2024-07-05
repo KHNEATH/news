@@ -8,7 +8,41 @@ $currentDate = date('Y-m-d H:i:s');
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+
 include('../include/dbconn.php');
+
+// Initialize variables
+$newsId = 1; // Assuming this is the ID of the news item to display
+
+// Check if session variable is not set (indicating first visit in this session)
+// if (!isset($_SESSION['visited'])) {
+//   try {
+//     // Increment view count in database
+//     $incrementViewCountStmt = $dbh->prepare("UPDATE viewer SET view_count = view_count + 1 WHERE id = :id");
+//     $incrementViewCountStmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+//     $incrementViewCountStmt->execute();
+
+//     // Set session variable to indicate visit
+//     $_SESSION['visited'] = true;
+//   } catch (PDOException $e) {
+//     die('Database error: ' . $e->getMessage());
+//   }
+// }
+
+// Fetch the news item to display
+try {
+  $stmt = $dbh->prepare("SELECT * FROM viewer WHERE id = :id");
+  $stmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+  $stmt->execute();
+  $newsItem = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if (!$newsItem) {
+    echo 'News item not found.';
+    exit();
+  }
+} catch (PDOException $e) {
+  die('Database error: ' . $e->getMessage());
+}
 if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
   header('location: ../index.php');
   exit(); // Terminate script after redirect
@@ -87,7 +121,7 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
       </div>
-      <div class="carousel-inner rounded-3 shadow-lg" style="object-fit: cover; height: 100vh;">
+      <div class="carousel-inner rounded-3 shadow-lg" style="object-fit: cover; height: auto;">
         <div class="carousel-item active">
           <img src="../images/2437919817_730789099252642_4101091192374117017_n.jpg   
             " class="d-block w-100" alt="..." style="object-fit: cover;" />
@@ -135,13 +169,17 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <div class="container">
       <div class="row">
         <?php foreach ($result as $row) : ?>
-          <div class="col-lg-3 col-sm-12 mb-2">
+          <div class="col-lg-3 col-sm-12 mb-4">
             <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
             <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
-              <div class="card h-100">
-                <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
+              <div class="card border-0 h-100 shadow-sm">
+                <?php
+                $profileImages = explode(",", $row['profile']);
+                $firstImage = trim($profileImages[0]); // Get the first image and trim any extra whitespace
+                echo '<img src="../uploads/' . htmlspecialchars($firstImage) . '" style="object-fit: cover; border-radius: 10px" height="auto" alt="...">';
+                ?>
                 <div class="card-body">
-                  <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                  <h6><?php echo htmlspecialchars($row['title']); ?></h6>
                   <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
                 </div>
                 <div class="card-footer">
@@ -164,9 +202,10 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
                     } else {
                       $timeAgo = 'Just now';
                     }
-                    echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
+                    // echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                   }
                   ?>
+                  <small class="text-muted"><i class='bx bxs-time bx-spin me-2'></i>Last updated <?php echo htmlspecialchars($timeAgo); ?></small>
                 </div>
               </div>
             </a>
@@ -197,14 +236,18 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
     <div class="container">
       <div class="row">
         <?php foreach ($result as $row) : ?>
-          <div class="col-lg-3 col-sm-12 mb-2">
+          <div class="col-lg-3 col-sm-12 mb-4">
             <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
             <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
-              <div class="card h-100">
-                <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" style="object-fit: cover;" height="300" alt="...">
+              <div class="card border-0 h-100 shadow-sm">
+                <?php
+                $profileImages = explode(",", $row['profile']);
+                $firstImage = trim($profileImages[0]); // Get the first image and trim any extra whitespace
+                echo '<img src="../uploads/' . htmlspecialchars($firstImage) . '" style="object-fit: cover; border-radius: 10px" height="auto" alt="...">';
+                ?>
                 <div class="card-body">
                   <h6><?php echo htmlspecialchars($row['title']); ?></h6>
-                  <p class="card-text lh-base text-break"><?php echo htmlspecialchars($row['text']); ?></p>
+                  <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
                 </div>
                 <div class="card-footer">
                   <?php
@@ -226,9 +269,10 @@ if (empty($_SESSION['userid'])) { // Check if userid is empty or not set
                     } else {
                       $timeAgo = 'Just now';
                     }
-                    echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
+                    // echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                   }
                   ?>
+                  <small class="text-muted"><i class='bx bxs-time bx-spin me-2'></i>Last updated <?php echo htmlspecialchars($timeAgo); ?></small>
                 </div>
               </div>
             </a>

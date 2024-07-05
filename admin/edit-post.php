@@ -6,7 +6,6 @@ date_default_timezone_set('Asia/Bangkok');
 // Get the current date and time in YYYY-MM-DD HH:MM:SS format
 $currentDate = date('Y-m-d H:i:s');
 
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -26,22 +25,28 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
             $edit_profile = '';
 
             // Check if a new profile image has been uploaded
-            if (isset($_FILES['profile']) && $_FILES['profile']['error'] == 0) {
-                // File upload logic
+            if (isset($_FILES['profile']) && $_FILES['profile']['error'][0] == 0) {
                 $uploadDir = "../uploads/"; // Directory to store uploaded files
-                $uploadFile = $uploadDir . basename($_FILES["profile"]["name"]);
+                $uploadedFiles = [];
 
-                // Move uploaded file to designated directory
-                if (move_uploaded_file($_FILES["profile"]["tmp_name"], $uploadFile)) {
-                    $edit_profile = basename($_FILES["profile"]["name"]); // Update profile image variable with new file name
-                } else {
-                    echo "Error uploading file."; // Display error message if file upload fails
+                // Loop through each file and upload
+                foreach ($_FILES['profile']['tmp_name'] as $key => $tmp_name) {
+                    $fileName = basename($_FILES['profile']['name'][$key]);
+                    $uploadFile = $uploadDir . $fileName;
+
+                    if (move_uploaded_file($tmp_name, $uploadFile)) {
+                        $uploadedFiles[] = $fileName;
+                    } else {
+                        echo "Error uploading file: " . $fileName;
+                    }
                 }
+
+                // Implode the uploaded file names into a comma-separated string
+                $edit_profile = implode(",", $uploadedFiles);
             }
 
             // Prepare SQL statement for updating post data
             $sql = "UPDATE post SET title = :title, text = :text";
-            // Update SQL statement to include profile image if it's been updated
             if (!empty($edit_profile)) {
                 $sql .= ", profile = :profile";
             }
@@ -95,19 +100,13 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     ?>
     <?php if (isset($msg)) { ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Sucess:</strong> <?php echo $msg;  ?>.
+            <strong>Success:</strong> <?php echo $msg; ?>.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
         </div>
-
     <?php } elseif (isset($error)) { ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Unsucess:</strong> <?php echo $msg;  ?>.
+            <strong>Error:</strong> <?php echo $error; ?>.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <div>
-            <?php echo $error;  ?>
-        </div>
         </div>
     <?php } ?>
 
@@ -119,18 +118,39 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
                     <form method="post" action="" enctype="multipart/form-data">
                         <div class="modal-body">
                             <input type="hidden" name="edit_id" value="<?php echo htmlentities($postData['id']); ?>">
-                            <input type="hidden" name="login_type" value="updatedimg">
                             <div class="flex-shrink-0 mt-n5 mx-sm-0 mx-auto">
                                 <!-- Clickable profile picture to change profile image -->
                                 <label for="profileInput" class="profile-image">
-                                    <?php if (!empty($postData['profile'])) : ?>
-                                        <img src="<?php echo htmlentities('../uploads/' . $postData['profile']); ?>" alt="user image" class="d-block h-auto ms-0 ms-sm-5 rounded border p-1 bg-light user-profile-img shadow-sm" height="150px" width="150px" style="object-fit: cover;">
-                                    <?php else : ?>
+                                    <?php
+                                    if (!empty($postData['profile'])) {
+                                        $profileImages = explode(",", $postData['profile']);
+                                    ?>
+                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <?php
+                                                foreach ($profileImages as $index => $image) {
+                                                    $active = ($index === 0) ? 'active' : '';
+                                                    echo '<div class="carousel-item ' . $active . '">';
+                                                    echo '<img style="object-fit: cover; width:100%; height: auto;" src="../uploads/' . trim($image) . '" />';
+                                                    echo '</div>';
+                                                }
+                                                ?>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    <?php } else { ?>
                                         <!-- Placeholder image if no profile picture exists -->
                                         <img src="placeholder.jpg" alt="user image" class="d-block h-auto ms-0 ms-sm-5 rounded border p-1 bg-light user-profile-img shadow-sm" height="150px" width="150px" style="object-fit: cover;">
-                                    <?php endif; ?>
+                                    <?php } ?>
                                 </label>
-                                <input type="file" name="profile" id="profileInput" class="d-none" accept="image/*">
+                                <input type="file" name="profile[]" id="profileInput" class="d-none" accept="image/*" multiple>
                             </div>
                             <div class="form-group">
                                 <label for="title">Title:</label>
@@ -183,13 +203,19 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
         <script>
             // Display selected profile image
             document.getElementById('profileInput').addEventListener('change', function() {
-                const profileImage = this.previousElementSibling.querySelector('img');
-                const file = this.files[0];
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profileImage.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
+                const profileImages = document.querySelector('.carousel-inner');
+                profileImages.innerHTML = ''; // Clear existing images
+
+                Array.from(this.files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'carousel-item' + (index === 0 ? ' active' : '');
+                        div.innerHTML = `<img src="${e.target.result}" class="d-block w-100" style="object-fit: cover; height: 300px;">`;
+                        profileImages.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                });
             });
         </script>
     </body>
@@ -197,7 +223,6 @@ if (isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
     </html>
 <?php
 } else {
-    // If user does not have admin privileges, display an error message
     echo "You do not have permission to access this page.";
 }
 ?>

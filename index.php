@@ -1,4 +1,5 @@
-<?php include('include/dbconn.php'); ?>
+<?php include('include/dbconn.php'); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <style>
     .no-underline {
       text-decoration: none;
@@ -113,21 +115,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item mx-3">
-            <a class="nav-link" href="../index.php">HOME</a>
+            <a class="nav-link" href="../user/user.php"><i class='bx bxs-home bx-tada me-2'></i>HOME</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="../pages/allnews.php">ALL NEWS</a>
+            <a class="nav-link" href="../pages/allnews.php"><i class='bx bx-news bx-tada me-2'></i>ALL NEWS</a>
           </li>
           <li class="nav-item mx-3">
             <a class="nav-link" href="../pages/about.php">ABOUT</a>
           </li>
           <li class="nav-item mx-3">
-            <a class="nav-link" href="../pages/contact.php">CONTACT</a>
+            <a class="nav-link text-red" href="../pages/contact.php"><i class='bx bxs-contact bx-tada me-2'></i>CONTACT</a>
           </li>
         </ul>
         <form class="d-flex">
-          <a href="login.php" class="btn btn-outline-secondary me-2">Login</a>
-          <a href="pages/register.php" class="btn btn-success">Register</a>
+          <a href="login.php" class="btn btn-outline-secondary me-2"><i class='bx bx-log-in bx-tada me-2'></i>Login</a>
+          <a href="pages/register.php" class="btn btn-success"><i class='bx bx-registered bx-tada me-2'></i>Register</a>
         </form>
       </div>
     </div>
@@ -184,44 +186,49 @@
     echo "Connection failed: " . $e->getMessage();
   }
   ?>
-  <div class="container card-container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+  <div class="container">
+    <div class="row">
       <?php foreach ($result as $row) : ?>
-        <div class="col-lg-3 col-sm-12 mb-2">
-          <div class="card h-100">
-            <img src="../uploads/<?php echo htmlspecialchars($row['profile']); ?>" class="card-img-top" style="object-fit: cover; height: 200px;" alt="...">
-            <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link text-decoration-none text-dark">
+        <div class="col-lg-3 col-sm-12 mb-4">
+          <!-- trov link vea kol knea mouy dom dermbey hover ban all -->
+          <a href="../user/detailinfo.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="hover-link">
+            <div class="card border-0 h-100 shadow-sm">
+              <?php
+              $profileImages = explode(",", $row['profile']);
+              $firstImage = trim($profileImages[0]); // Get the first image and trim any extra whitespace
+              echo '<img src="../uploads/' . htmlspecialchars($firstImage) . '" style="object-fit: cover; border-radius: 10px" height="auto" alt="...">';
+              ?>
               <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                <h6><?php echo htmlspecialchars($row['title']); ?></h6>
                 <p class="card-text"><?php echo htmlspecialchars($row['text']); ?></p>
               </div>
-            </a>
-            <div class="card-footer">
-              <?php
-              if (isset($row['created_at'])) {
-                $createdDate = new DateTime($row['created_at']);
-                $now = new DateTime();
-                $interval = $now->diff($createdDate);
+              <div class="card-footer">
+                <?php
+                if (isset($row['created_at'])) {
+                  $createdDate = new DateTime($row['created_at']);
+                  $now = new DateTime();
+                  $interval = $now->diff($createdDate);
 
-                if ($interval->y > 0) {
-                  $timeAgo = $interval->y . ' years ago';
-                } elseif ($interval->m > 0) {
-                  $timeAgo = $interval->m . ' months ago';
-                } elseif ($interval->d > 0) {
-                  $timeAgo = $interval->d . ' days ago';
-                } elseif ($interval->h > 0) {
-                  $timeAgo = $interval->h . ' hours ago';
-                } else {
-                  $timeAgo = 'Just now';
+                  if ($interval->y > 0) {
+                    $timeAgo = $interval->y . ' years ago';
+                  } elseif ($interval->m > 0) {
+                    $timeAgo = $interval->m . ' months ago';
+                  } elseif ($interval->d > 0) {
+                    $timeAgo = $interval->d . ' days ago';
+                  } elseif ($interval->h > 0) {
+                    $timeAgo = $interval->h . ' hours ago';
+                  } elseif ($interval->i > 0) {
+                    $timeAgo = $interval->i . ' minutes ago';
+                  } else {
+                    $timeAgo = 'Just now';
+                  }
+                  // echo '<small class="text-muted">Last updated ' . htmlspecialchars($timeAgo) . '</small>';
                 }
-                echo '<small class="text-muted">Posted ' . $timeAgo . '</small>';
-              }
-              ?>
-              <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#shareModal<?php echo $row['id']; ?>" onclick="setShareData('<?php echo htmlspecialchars($row['title']); ?>', '<?php echo urlencode('https://yourwebsite.com/user/detailinfo.php?id=' . htmlspecialchars($row['id'])); ?>')">
-                <i class="fas fa-share-alt"></i> Share
-              </button>
+                ?>
+                <small class="text-muted"><i class='bx bxs-time bx-spin me-2'></i>Last updated <?php echo htmlspecialchars($timeAgo); ?></small>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       <?php endforeach; ?>
     </div>

@@ -1,10 +1,50 @@
+<?php
+// Start PHP session
+
+
+// Include database connection
+
+
+// Check if session variable is not set (indicating first visit in this session)
+if (!isset($_SESSION['visited'])) {
+    // Increment view count in database
+    try {
+        // Assuming your table name is 'viewer' and you have a field 'view_count' and an 'id' for the news item
+        $newsId = 1; // Replace with your actual news item ID or get it from your page logic
+        $incrementViewCountStmt = $dbh->prepare("UPDATE viewer SET view_count = view_count + 1 WHERE id = :id");
+        $incrementViewCountStmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+        $incrementViewCountStmt->execute();
+
+        // Set session variable to indicate visit
+        $_SESSION['visited'] = true;
+    } catch (PDOException $e) {
+        die('Database error: ' . $e->getMessage());
+    }
+}
+
+// Fetch the news item to display
+try {
+    $stmt = $dbh->prepare("SELECT * FROM viewer WHERE id = :id");
+    $stmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+    $stmt->execute();
+    $newsItem = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$newsItem) {
+        echo 'News item not found.';
+        exit();
+    }
+} catch (PDOException $e) {
+    die('Database error: ' . $e->getMessage());
+}
+?>
+
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <!-- Left -->
         <div class="me-5 d-none d-lg-block">
-            <span>Get connected with us on social networks:</span>
+        <i class='bx bx-show bx-tada me-2' ></i><span>Viewer Page:<?php echo htmlspecialchars($newsItem['view_count']); ?></span>
         </div>
         <!-- Right -->
         <div>
@@ -89,4 +129,3 @@
     </div>
     <!-- Copyright -->
 </footer>
-<!-- Footer -->

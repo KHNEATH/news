@@ -9,6 +9,40 @@ if (empty($_SESSION['userid'])) {
     exit();
 }
 
+
+// Initialize variables
+$newsId = 1; // Assuming this is the ID of the news item to display
+
+// Check if session variable is not set (indicating first visit in this session)
+if (!isset($_SESSION['visited'])) {
+  try {
+    // Increment view count in database
+    $incrementViewCountStmt = $dbh->prepare("UPDATE viewer SET view_count = view_count + 1 WHERE id = :id");
+    $incrementViewCountStmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+    $incrementViewCountStmt->execute();
+
+    // Set session variable to indicate visit
+    $_SESSION['visited'] = true;
+  } catch (PDOException $e) {
+    die('Database error: ' . $e->getMessage());
+  }
+}
+
+// Fetch the news item to display
+try {
+  $stmt = $dbh->prepare("SELECT * FROM viewer WHERE id = :id");
+  $stmt->bindParam(':id', $newsId, PDO::PARAM_INT);
+  $stmt->execute();
+  $newsItem = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if (!$newsItem) {
+    echo 'News item not found.';
+    exit();
+  }
+} catch (PDOException $e) {
+  die('Database error: ' . $e->getMessage());
+}
+
 $stmt = $dbh->prepare("SELECT * FROM contact");
 $stmt->execute();
 $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
